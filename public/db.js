@@ -75,11 +75,12 @@ getAll.onsuccess = function () {
     })
       .then((res) => res.json())
       .then((result) => {
+        //if our returned response is not empty
         if (result.length !== 0) {
           //open another transaction to BudgetStore with the ability to read and write
           const transaction = db.transaction(["BudgetStore"], "readwrite");
 
-          // Assign the curren store to a variable...again
+          // Assign the current store to a variable...again
           const currentStore = transaction.objectStore("BudgetStore");
 
           //Clear existing entries because buld add was successful and nothing needs to be stored in IndexedDB as we are currently online
@@ -89,3 +90,6 @@ getAll.onsuccess = function () {
       });
   }
 };
+
+//Event Listener to listen for app coming back online
+window.addEventListener("online", checkDatabase());
