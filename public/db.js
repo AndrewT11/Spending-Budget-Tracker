@@ -47,3 +47,17 @@ function saveRecord(payment) {
   //Here, we add the payment offline to the BudgetStoreDB BudgetStore object store
   store.add(payment);
 }
+
+//function that is called once browser is back online and ready to sync with server. Will add offline transactions with total transactions
+function checkDatabase() {
+  console.log("check db invoked");
+
+  //Open a transaction in our BudgetDB
+  const transaction = db.transaction(["BudgetStore"], "readwrite");
+
+  //Access to the BudgetStore object store
+  const store = transaction.objectStore("BudgetStore");
+
+  //grabbing everything inside the BudgetStore object store
+  const getAll = store.GetAll();
+}
