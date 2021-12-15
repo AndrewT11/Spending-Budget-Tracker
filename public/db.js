@@ -61,3 +61,31 @@ function checkDatabase() {
   //grabbing everything inside the BudgetStore object store
   const getAll = store.GetAll();
 }
+//This is where we check to see if any transactions have been saved offline
+getAll.onsuccess = function () {
+  //if there are transactions = true...fetch those transaction at that end point.
+  if (getAll.result.length > 0) {
+    fetch("/api/transaction/bulk", {
+      method: "POST",
+      body: JSON.stringify(getAll.result),
+      headers: {
+        Accept: "application/json, text/plain, */*",
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => res.json())
+      .then((result) => {
+        if (result.length !== 0) {
+          //open another transaction to BudgetStore with the ability to read and write
+          const transaction = db.transaction(["BudgetStore"], "readwrite");
+
+          // Assign the curren store to a variable...again
+          const currentStore = transaction.objectStore("BudgetStore");
+
+          //Clear existing entries because buld add was successful and nothing needs to be stored in IndexedDB as we are currently online
+          currentStore.clear();
+          console.log();
+        }
+      });
+  }
+};
