@@ -27,3 +27,8 @@ request.onsuccess = function (event) {
     checkDatabase();
   }
 };
+
+request.onerror = function (event) {
+  //Error log
+  console.log(`Error: ${event.target.errorCode}`);
+};
