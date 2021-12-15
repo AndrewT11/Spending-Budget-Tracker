@@ -32,3 +32,18 @@ request.onerror = function (event) {
   //Error log
   console.log(`Error: ${event.target.errorCode}`);
 };
+
+//if off line, error will be thrown. sendTransaction() will have a catch error, which calls saveRecords() to place this transaction into the BudgetDB for use when we are back online.
+function saveRecord(payment) {
+  //will only show in offline mode
+  console.log("Save record invoked");
+
+  //Opening a transaction in BudgetStore of the DB
+  const transaction = db.transaction(["BudgetStore"], "readwrite");
+
+  //Access BudgetStore objectStore
+  const store = transaction.objectStore("BudgetStore");
+
+  //Here, we add the payment offline to the BudgetStoreDB BudgetStore object store
+  store.add(payment);
+}
