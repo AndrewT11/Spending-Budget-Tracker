@@ -1,4 +1,5 @@
 let db;
+let budgetVersion;
 
 // creating a new database request for a "BudgetDB" database.
 const request = indexedDB.open("BudgetDB", 1);
@@ -34,7 +35,7 @@ request.onerror = function (event) {
 };
 
 //if off line, error will be thrown. sendTransaction() will have a catch error, which calls saveRecords() to place this transaction into the BudgetDB for use when we are back online.
-function saveRecord(payment) {
+const saveRecord = (payment) => {
   //will only show in offline mode
   console.log("Save record invoked");
 
@@ -46,7 +47,7 @@ function saveRecord(payment) {
 
   //Here, we add the payment offline to the BudgetStoreDB BudgetStore object store
   store.add(payment);
-}
+};
 
 //function that is called once browser is back online and ready to sync with server. Will add offline transactions with total transactions
 function checkDatabase() {
@@ -92,4 +93,4 @@ getAll.onsuccess = function () {
 };
 
 //Event Listener to listen for app coming back online
-window.addEventListener("online", checkDatabase());
+window.addEventListener("online", checkDatabase);
