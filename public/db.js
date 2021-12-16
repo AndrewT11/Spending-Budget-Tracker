@@ -60,37 +60,39 @@ function checkDatabase() {
   const store = transaction.objectStore("BudgetStore");
 
   //grabbing everything inside the BudgetStore object store
-  const getAll = store.GetAll();
+  const getAll = store.getAll();
+
+  //This is where we check to see if any transactions have been saved offline
+  getAll.onsuccess = function () {
+    console.log("getAll.onsuccess");
+    //if there are transactions = true...fetch those transaction at that end point.
+    if (getAll.result.length > 0) {
+      fetch("/api/transaction/bulk", {
+        method: "POST",
+        body: JSON.stringify(getAll.result),
+        headers: {
+          Accept: "application/json, text/plain, */*",
+          "Content-Type": "application/json",
+        },
+      })
+        .then((res) => res.json())
+        .then((result) => {
+          //if our returned response is not empty
+          if (result.length !== 0) {
+            //open another transaction to BudgetStore with the ability to read and write
+            const transaction = db.transaction(["BudgetStore"], "readwrite");
+
+            // Assign the current store to a variable...again
+            const currentStore = transaction.objectStore("BudgetStore");
+
+            //Clear existing entries because buld add was successful and nothing needs to be stored in IndexedDB as we are currently online
+            currentStore.clear();
+            console.log("Store Cleared");
+          }
+        });
+    }
+  };
 }
-//This is where we check to see if any transactions have been saved offline
-getAll.onsuccess = function () {
-  //if there are transactions = true...fetch those transaction at that end point.
-  if (getAll.result.length > 0) {
-    fetch("/api/transaction/bulk", {
-      method: "POST",
-      body: JSON.stringify(getAll.result),
-      headers: {
-        Accept: "application/json, text/plain, */*",
-        "Content-Type": "application/json",
-      },
-    })
-      .then((res) => res.json())
-      .then((result) => {
-        //if our returned response is not empty
-        if (result.length !== 0) {
-          //open another transaction to BudgetStore with the ability to read and write
-          const transaction = db.transaction(["BudgetStore"], "readwrite");
-
-          // Assign the current store to a variable...again
-          const currentStore = transaction.objectStore("BudgetStore");
-
-          //Clear existing entries because buld add was successful and nothing needs to be stored in IndexedDB as we are currently online
-          currentStore.clear();
-          console.log();
-        }
-      });
-  }
-};
 
 //Event Listener to listen for app coming back online
 window.addEventListener("online", checkDatabase);
