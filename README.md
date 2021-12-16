@@ -1,6 +1,8 @@
 # Spending-Budget-Tracker
 
-A weather app for sweater decisions
+```
+An app to track your spending habits.
+```
 
 **Version 1.0**
 
@@ -10,51 +12,91 @@ You are important.
 
 ## Installation Instructions
 
+```
 No installation necessary.
 
-1. Click on live page.
-2. Type in City to search
-3. Push search.
-4. Pray the app halfway works.
-5. Get some data you didn't know you needed.
+1. Click on deployed link.
+2. Type in the name of transaction and the amount.
+3. Click Add or Subtract to complete budget app transaction.
+4. Boom. It's that easy.
+```
 
 ## Acceptance Criteria
 
+```
+GIVEN a user is on Budget App without an internet connection
+WHEN the user inputs a withdrawal or deposit
+THEN that will be shown on the page, and added to their transaction history when their connection is back online.
+```
+
 Students have completed this project when:
 
-GIVEN a weather dashboard with form inputs
+```
+Add functionality to our existing Budget Tracker application to allow for offline access and functionality.
 
-- WHEN I search for a city <br>
-  THEN I am presented with current and future conditions for that city and that city is added to the search history<br>
-- WHEN I view current weather conditions for that city<br>
-  THEN I am presented with the city name, the date, an icon representation of weather conditions, the temperature, the humidity, the wind speed, and the UV index<br>
-- WHEN I view the UV index<br>
-  THEN I am presented with a color that indicates whether the conditions are favorable, moderate, or severe<br>
-- WHEN I view future weather conditions for that city<br>
-  THEN I am presented with a 5-day forecast that displays the date, an icon representation of weather conditions, the temperature, the wind speed, and the humidity<br>
-- WHEN I click on a city in the search history<br>
-  THEN I am again presented with current and future conditions for that city<br>
+The user will be able to add expenses and deposits to their budget with or without a connection. When entering transactions offline, they should populate the total when brought back online.
+
+Offline Functionality:
+
+- Enter deposits offline
+
+- Enter expenses offline
+
+When brought back online:
+
+- Offline entries should be added to tracker.
+```
+
+## User Story
+
+```
+AS AN avid traveller
+I WANT to be able to track my withdrawals and deposits with or without a data/internet connection
+SO THAT my account balance is accurate when I am traveling
+```
+
+## Business Context
+
+```
+Giving users a fast and easy way to track their money is important, but allowing them to access that information anytime is even more important. Having offline functionality is paramount to our applications success.
+```
 
 ## Screenshot
 
-![Weather Demo](assets/sweater-weather.gif)
+![Budget Tracker Main Screen](./assets/budgettrackerSS.png)
+
+## Technologies Used
+
+```
+- IndexedDB
+- Javascript
+- Mongoose
+- Compression
+- Express
+- logger
+- router
+```
 
 ## Links
 
-- [Deployed Website Link](https://andrewt11.github.io/Sweater-Weather/)
-- [Code Repository Link](https://github.com/AndrewT11/Sweater-Weather)
+- [Deployed Website Link](https://andrewt11.github.io/Spending-Budget-Tracker/)
+- [Code Repository Link](https://github.com/AndrewT11/Spending-Budget-Tracker/)
 
 ## Credits
 
+```
 Andrew Tran
+Jon Lynch
+```
 
 ### Resources
 
+```
 - https://www.w3schools.com/
 - https://developer.mozilla.org/en-US/
 - https://choosealicense.com/
-- https://openweathermap.org/
 - https://www.stackoverflow.com
+```
 
 ### License
 
