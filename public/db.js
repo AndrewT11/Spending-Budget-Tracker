@@ -64,7 +64,7 @@ function checkDatabase() {
 
   //This is where we check to see if any transactions have been saved offline
   getAll.onsuccess = function () {
-    console.log("getAll.onsuccess");
+    console.log("getAll.onsuccess db.js");
     //if there are transactions = true...fetch those transaction at that end point.
     if (getAll.result.length > 0) {
       fetch("/api/transaction/bulk", {
