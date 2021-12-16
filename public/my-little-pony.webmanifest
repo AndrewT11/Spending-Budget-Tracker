@@ -1,0 +1,20 @@
+{
+  "short_name": "Budget App",
+  "name": "Budget App Manifest",
+  "icons": [
+    {
+      "src": "/icons/icon192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icons/icon512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "start_url": "/",
+  "background_color": "#808080",
+  "display": "standalone",
+  "theme_color": "#808080"
+}
